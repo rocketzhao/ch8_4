@@ -1,0 +1,16 @@
+http://www.bysocket.com/?p=1712
+
+CREATE TABLE `city` (
+    `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '城市编号',
+    `province_id` int(10) unsigned NOT NULL COMMENT '省份编号',
+    `city_name` varchar(128) DEFAULT NULL COMMENT '城市名称',
+    `description` varchar(128) DEFAULT NULL COMMENT '描述',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE user
+(
+    `id` bigint unsigned PRIMARY KEY NOT NULL COMMENT '用户编号' AUTO_INCREMENT,
+    `user_name` VARCHAR(128) COMMENT '用户名称',
+    `description` VARCHAR(128) COMMENT '描述'
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
