@@ -1,4 +1,4 @@
-package com.wisely.ch8_4.config.ds;
+package com.wisely.ch8_4.config.ds.fix;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
