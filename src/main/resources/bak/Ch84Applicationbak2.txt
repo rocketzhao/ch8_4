@@ -1,0 +1,16 @@
+/*package com.wisely.ch8_4;
+
+@SpringBootApplication
+@Import({DynamicDataSourceRegister.class})
+@MapperScan("com.wisely.ch8_4.mapper.*")
+public class Ch84Applicationbak2 extends SpringBootServletInitializer {
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(Ch84Applicationbak2.class);
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(Ch84Applicationbak2.class, args);
+	}
+}*/

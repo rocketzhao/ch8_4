@@ -1,7 +1,9 @@
-package com.wisely.ch8_4.dao.cluster;
+package com.wisely.ch8_4.mapper.cluster;
 
 import com.wisely.ch8_4.domain.User;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Long id);
 

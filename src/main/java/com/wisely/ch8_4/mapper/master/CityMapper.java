@@ -1,4 +1,4 @@
-package com.wisely.ch8_4.dao.master;
+package com.wisely.ch8_4.mapper.master;
 
 import com.wisely.ch8_4.domain.City;
 import org.apache.ibatis.annotations.Mapper;

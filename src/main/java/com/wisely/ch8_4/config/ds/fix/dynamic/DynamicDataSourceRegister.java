@@ -19,22 +19,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 动态数据源注册，相当于之前的xml中datasource配置
+ * 动态数据源注册，相当于之前的xml中datasource配置（这种代码设计的很赞，而且对数据库连接池的类的运用也很熟练！）
+ * http://412887952-qq-com.iteye.com/blog/2303075
  *
  * Created by jun.zhao on 2017/8/30.
  */
 public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar, EnvironmentAware {
 
-        //如配置文件中未指定数据源类型，使用该默认值
+        /**
+         * 如配置文件中未指定数据源类型，使用该默认值（tomcat jdbc连接池）
+         * http://wiki.jikexueyuan.com/project/tomcat/tomcat-jdbc-pool.html
+         */
         private static final Object DATASOURCE_TYPE_DEFAULT = "org.apache.tomcat.jdbc.pool.DataSource";
 
         private ConversionService conversionService = new DefaultConversionService();
 
+        //连接池的补充设置，只加载一次
         private PropertyValues dataSourcePropertyValues;
 
         // 默认数据源
         private DataSource defaultDataSource;
 
+        //更多数据源
         private Map<String, DataSource> customDataSources = new HashMap<String, DataSource>();
 
         /**
@@ -43,8 +49,8 @@ public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar,
         @Override
         public void setEnvironment(Environment environment) {
             System.out.println("DynamicDataSourceRegister.setEnvironment() start");
-            initDefaultDataSource(environment);
-            initCustomDataSources(environment);
+            initDefaultDataSource(environment);//主数据源
+            initCustomDataSources(environment);//更多数据源
             System.out.println("DynamicDataSourceRegister.setEnvironment() end");
         }
 
@@ -62,7 +68,7 @@ public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar,
             dsMap.put("username", propertyResolver.getProperty("username"));
             dsMap.put("password", propertyResolver.getProperty("password"));
 
-            //创建数据源;
+            //创建主数据源;
             defaultDataSource = buildDataSource(dsMap);
             dataBinder(defaultDataSource, env);
         }
@@ -101,7 +107,7 @@ public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar,
                 String url = dsMap.get("url").toString();
                 String username = dsMap.get("username").toString();
                 String password = dsMap.get("password").toString();
-                DataSourceBuilder factory =   DataSourceBuilder.create().driverClassName(driverClassName).url(url).username(username).password(password).type(dataSourceType);
+                DataSourceBuilder factory = DataSourceBuilder.create().driverClassName(driverClassName).url(url).username(username).password(password).type(dataSourceType);
                 return factory.build();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -120,7 +126,7 @@ public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar,
             dataBinder.setIgnoreNestedProperties(false);//false
             dataBinder.setIgnoreInvalidFields(false);//false
             dataBinder.setIgnoreUnknownFields(true);//true
-
+            //加载连接池的补充设置
             if(dataSourcePropertyValues == null){
                 Map<String, Object> rpr = new RelaxedPropertyResolver(env, "spring.datasource").getSubProperties(".");
                 Map<String, Object> values = new HashMap<>(rpr);
