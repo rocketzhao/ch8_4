@@ -1,4 +1,4 @@
-package com.wisely.ch8_4.config.ds.fix.dynamic;
+package com.wisely.ch8_4.config.ds.dynamic;
 
 import java.util.ArrayList;
 import java.util.List;
