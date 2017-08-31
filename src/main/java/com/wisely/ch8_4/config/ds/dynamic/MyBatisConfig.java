@@ -116,12 +116,13 @@ public class MyBatisConfig {
                                                  @Qualifier("ds1DataSource") DataSource ds1DataSource,
                                                  @Qualifier("ds2DataSource") DataSource ds2DataSource,
                                                  @Qualifier("ds3DataSource") DataSource ds3DataSource) throws Exception {
+
         SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
         fb.setDataSource(this.dsDataSource(ds0DataSource, ds1DataSource, ds2DataSource, ds3DataSource));// 指定数据源(这个必须有，否则报错)
         // 下边两句仅仅用于*.xml文件，如果整个持久层操作不需要使用到xml文件的话（只用注解就可以搞定），则不加
 //        fb.setTypeAliasesPackage(env.getProperty("custom.datasource.mybatis.typeAliasesPackage"));// 指定基包
-        fb.setMapperLocations(
-                new PathMatchingResourcePatternResolver().getResources(env.getProperty("custom.datasource.ds.mapperLocations")));//
+        fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(
+                env.getProperty("custom.datasource.ds.mapperLocations")));//
 
         return fb.getObject();
     }

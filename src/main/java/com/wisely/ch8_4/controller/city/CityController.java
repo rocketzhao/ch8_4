@@ -1,7 +1,9 @@
-package com.wisely.ch8_4.controller;
+package com.wisely.ch8_4.controller.city;
 
 import com.wisely.ch8_4.domain.City;
 import com.wisely.ch8_4.service.CityService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +17,8 @@ import javax.annotation.Resource;
 @Controller
 public class CityController {
 
+    private static Logger logger = LoggerFactory.getLogger(CityController.class);
+
     private String message = "Hello World";
 
     @Resource
@@ -27,6 +31,7 @@ public class CityController {
         if(city == null){
             throw new Exception(cityName);
         }
+        logger.info("city : {}", city);
         return city;
     }
 
