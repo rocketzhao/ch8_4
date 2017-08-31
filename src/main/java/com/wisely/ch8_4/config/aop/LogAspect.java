@@ -27,7 +27,7 @@ public class LogAspect {
      * 上面这种是连接池的创建日志
      */
 
-    @Around("execution(* com.wisely.ch8_4.controller.*.*(..)) || execution(* com.wisely.ch8_4.controller.*.*.*(..))")
+    @Around("execution(* com.wisely.ch8_4.service.impl.*.*(..))")
     public Object methodAop(ProceedingJoinPoint pjp)
             throws Throwable {
 

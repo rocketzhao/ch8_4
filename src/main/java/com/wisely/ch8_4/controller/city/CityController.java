@@ -31,7 +31,6 @@ public class CityController {
         if(city == null){
             throw new Exception(cityName);
         }
-        logger.info("city : {}", city);
         return city;
     }
 
