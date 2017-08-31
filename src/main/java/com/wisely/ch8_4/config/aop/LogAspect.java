@@ -13,6 +13,10 @@ import java.util.Arrays;
  *
  *  调用方法的参数日志
  *
+ * com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ * com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+ * 上面这种是连接池的创建日志
+ *
  * Created by jun.zhao on 2017/8/31.
  */
 @Aspect
@@ -20,12 +24,6 @@ import java.util.Arrays;
 public class LogAspect {
 
     private static Logger logger = LoggerFactory.getLogger(LogAspect.class);
-
-    /**
-     * com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
-     * com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
-     * 上面这种是连接池的创建日志
-     */
 
     @Around("execution(* com.wisely.ch8_4.service.impl.*.*(..))")
     public Object methodAop(ProceedingJoinPoint pjp)
