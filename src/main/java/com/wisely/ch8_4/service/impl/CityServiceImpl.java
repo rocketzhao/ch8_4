@@ -5,6 +5,8 @@ import com.wisely.ch8_4.dao.UserDao;
 import com.wisely.ch8_4.domain.City;
 import com.wisely.ch8_4.domain.User;
 import com.wisely.ch8_4.service.CityService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,6 +18,8 @@ import javax.annotation.Resource;
 @Service("cityService")
 public class CityServiceImpl implements CityService {
 
+    private static Logger logger = LoggerFactory.getLogger(CityServiceImpl.class);
+
     @Resource
     private UserDao userDao;
 
@@ -25,7 +29,7 @@ public class CityServiceImpl implements CityService {
     @Override
     public City findByName(String cityName) {
         User user = userDao.selectByPrimaryKey(1L);
-        System.out.println(user == null ? null : user.getUserName());
+        logger.info("user: {}", user == null ? null : user.getUserName());
         return cityDao.findByName(cityName);
     }
 }
